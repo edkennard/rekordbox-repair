@@ -1,7 +1,7 @@
 ## rekordbox Repair
 
 ### Introduction
-rekordbox Repair is designed to help users of Pioneer's rekordbox DJ software fix problems with their rekordbox collections, as well as keep them clean on an ongoing basis. I wrote it as part of some consulting work helping George Evelyn a.k.a. [Nightmares on Wax](nightmaresonwax.com) sort out his studio and DJ'ing computers. George has a MacOS rekordbox collection of around 7200 tracks and counting, so it's against that that this tool has initially been battle-tested.
+rekordbox Repair is designed to help users of Pioneer's rekordbox DJ software fix problems with their rekordbox collections, as well as keep them clean on an ongoing basis. I wrote it as part of some consulting work helping George Evelyn a.k.a. [Nightmares on Wax](https://nightmaresonwax.com) sort out his studio and DJ'ing computers. George has a MacOS rekordbox collection of around 7200 tracks and counting, so it's against that that this tool has initially been battle-tested.
 
 rekordbox Repair is a simple command line tool which works on both MacOS and Windows. It analyses an exported rekordbox collection in XML format, searches the folder on disk where your music files live, then produces the following two files:
 
