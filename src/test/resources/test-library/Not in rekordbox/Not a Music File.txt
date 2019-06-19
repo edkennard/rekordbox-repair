@@ -1,0 +1,1 @@
+Present to ensure when scanning for files which don't exist in rekordbox we're only including music files

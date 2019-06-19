@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DJ_PLAYLISTS Version="1.0.0">
+    <PRODUCT Name="rekordbox" Version="5.6.0" Company="Pioneer DJ"/>
+    <COLLECTION Entries="3">
+        <TRACK TrackID="4" Name="HORN" Artist="" Composer="" Album="" Grouping=""
+               Genre="" Kind="WAV File" Size="2010816" TotalTime="7" DiscNumber="0"
+               TrackNumber="0" Year="0" AverageBpm="0.00" DateAdded="2019-05-30"
+               BitRate="2116" SampleRate="44100" Comments="" PlayCount="0" Rating="0"
+               Location="file://localhost{testLibraryDirectory}/PioneerDJ/Sampler/OSC_SAMPLER/PRESET%20RELOCATED/HORN.wav"
+               Remixer="" Tonality="" Label="" Mix=""/>
+        <TRACK TrackID="6" Name="Demo Track 2" Artist="Loopmasters" Composer=""
+               Album="" Grouping="" Genre="" Kind="MP3 File" Size="5124342"
+               TotalTime="128" DiscNumber="0" TrackNumber="0" Year="0" AverageBpm="120.00"
+               DateAdded="2019-05-30" BitRate="320" SampleRate="44100" Comments="Tracks by www.loopmasters.com"
+               PlayCount="0" Rating="0" Location="file://localhost{testLibraryDirectory}/PioneerDJ/Recording/Demo%20Track%202.mp3"
+               Remixer="" Tonality="" Label="Loopmasters" Mix="">
+            <TEMPO Inizio="0.025" Bpm="120.00" Metro="4/4" Battito="1"/>
+            <TEMPO Inizio="48.026" Bpm="120.00" Metro="4/4" Battito="1"/>
+            <TEMPO Inizio="48.525" Bpm="120.00" Metro="4/4" Battito="2"/>
+            <TEMPO Inizio="49.026" Bpm="120.00" Metro="4/4" Battito="3"/>
+            <TEMPO Inizio="49.525" Bpm="120.00" Metro="4/4" Battito="4"/>
+            <TEMPO Inizio="50.026" Bpm="120.00" Metro="4/4" Battito="1"/>
+            <TEMPO Inizio="50.525" Bpm="120.00" Metro="4/4" Battito="2"/>
+            <TEMPO Inizio="51.026" Bpm="120.00" Metro="4/4" Battito="3"/>
+            <TEMPO Inizio="51.525" Bpm="120.00" Metro="4/4" Battito="4"/>
+            <TEMPO Inizio="52.026" Bpm="120.00" Metro="4/4" Battito="1"/>
+        </TRACK>
+        <TRACK TrackID="7" Name="Hash Track" Artist="" Composer="" Album="" Grouping=""
+               Genre="" Kind="WAV File" Size="1941204" TotalTime="7" DiscNumber="0"
+               TrackNumber="0" Year="0" AverageBpm="0.00" DateAdded="2019-05-30"
+               BitRate="2116" SampleRate="44100" Comments="" PlayCount="0" Rating="0"
+               Location="file://localhost{testLibraryDirectory}/Special%20Filenames/Name%20with%20#.mp3"
+               Remixer="" Tonality="" Label="" Mix=""/>
+    </COLLECTION>
+    <PLAYLISTS>
+        <NODE Count="3" Name="ROOT" Type="0">
+            <NODE Count="4" Type="0" Name="Playlist Folder">
+                <NODE Entries="2" KeyType="0" Type="1" Name="Loopmasters">
+                    <TRACK Key="6"/>
+                </NODE>
+            </NODE>
+        </NODE>
+    </PLAYLISTS>
+</DJ_PLAYLISTS>
