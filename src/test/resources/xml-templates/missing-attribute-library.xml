@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DJ_PLAYLISTS Version="1.0.0">
+    <PRODUCT Name="rekordbox" Version="5.6.0" Company="Pioneer DJ"/>
+    <COLLECTION Entries="6">
+        <TRACK TrackID="1" Artist="" Composer="" Album="" Grouping=""
+               Genre="" Kind="WAV File" Size="1382226" TotalTime="5" DiscNumber="0"
+               TrackNumber="0" Year="0" AverageBpm="0.00" DateAdded="2019-05-30"
+               BitRate="2116" SampleRate="44100" Comments="" PlayCount="0" Rating="0"
+               Location="file://localhost{testLibraryDirectory}/PioneerDJ/Sampler/OSC_SAMPLER/PRESET%20ONESHOT/NOISE.wav"
+               Remixer="" Tonality="" Label="" Mix=""/>
+    </COLLECTION>
+    <PLAYLISTS>
+        <NODE Type="0" Name="ROOT" Count="0"/>
+    </PLAYLISTS>
+</DJ_PLAYLISTS>

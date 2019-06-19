@@ -1,0 +1,40 @@
+rekordbox Repair Report
+
+
+Summary
+{summary}
+
+
+Repaired tracks
+
+The original files for the following tracks were not found in their expected locations, but were found elsewhere and repaired versions have been written to the output XML file:
+
+{tracks-repaired}
+
+
+Tracks with multiple matches
+
+The original files for the following tracks were not found in their expected locations, but multiple files with the same name were found elsewhere:
+
+{tracks-multiple-matches}
+
+
+Tracks with missing files
+
+The files for the following tracks couldn't be found anywhere in the specified search directory:
+
+{tracks-missing}
+
+
+Tracks with path too long
+
+rekordbox has a limit of 255 characters for the full path to a track's file, e.g. "/Users/User/Music/Library/Artist/Album/Music File.mp3" is 53 characters long.  The following files exceed that limit and therefore can't be imported to rekordbox:
+
+{tracks-path-too-long}
+
+
+Tracks on disk but not in rekordbox
+
+The following files exist in the specified search directory but haven't yet been imported into rekordbox:
+
+{tracks-not-in-rekordbox}

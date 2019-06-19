@@ -1,0 +1,67 @@
+rekordbox Repair Report
+
+
+Summary
+
+Total tracks in collection: 7
+Tracks OK: 2
+Tracks repaired: 3
+Tracks with multiple matches: 1
+Tracks with missing files: 1
+Tracks with path too long: 0
+Tracks on disk but not in rekordbox: 1
+
+
+
+Repaired tracks
+
+The original files for the following tracks were not found in their expected locations, but were found elsewhere and repaired versions have been written to the output XML file:
+
+No Artist - No Album - 'HORN'
+Old: {testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET ONESHOT\HORN.wav
+New: {testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET RELOCATED\HORN.wav
+
+No Artist - No Album - 'Hash Track'
+Old: {testLibraryDirectory}\Name with #.mp3
+New: {testLibraryDirectory}\Special Filenames\Name with #.mp3
+
+'Loopmasters' - No Album - 'Demo Track 2'
+Old: {testLibraryDirectory}\PioneerDJ\Demo Tracks\Demo Track 2.mp3
+New: {testLibraryDirectory}\PioneerDJ\Recording\Demo Track 2.mp3
+
+
+
+Tracks with multiple matches
+
+The original files for the following tracks were not found in their expected locations, but multiple files with the same name were found elsewhere:
+
+No Artist - No Album - 'SINEWAVE'
+Old:
+{testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET ONESHOT\SINEWAVE.wav
+
+New (Potentials):
+{testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET RELOCATED DUPLICATE 1\SINEWAVE.wav
+{testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET RELOCATED DUPLICATE 2\SINEWAVE.wav
+
+
+Tracks with missing files
+
+The files for the following tracks couldn't be found anywhere in the specified search directory:
+
+No Artist - No Album - 'NOISE'
+Missing: {testLibraryDirectory}\PioneerDJ\Sampler\OSC_SAMPLER\PRESET ONESHOT\NOISE.wav
+
+
+
+Tracks with path too long
+
+rekordbox has a limit of 255 characters for the full path to a track's file, e.g. "/Users/User/Music/Library/Artist/Album/Music File.mp3" is 53 characters long.  The following files exceed that limit and therefore can't be imported to rekordbox:
+
+
+
+
+Tracks on disk but not in rekordbox
+
+The following files exist in the specified search directory but haven't yet been imported into rekordbox:
+
+{testLibraryDirectory}\Not in rekordbox\Not in rekordbox.mp3
