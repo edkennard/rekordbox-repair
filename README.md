@@ -7,7 +7,7 @@ rekordbox Repair is a simple command line tool which works on both MacOS and Win
 
 1. **A new rekordbox XML file** containing the repaired tracks with their correct file locations, original cue points and loops, and the playlists they belong to. This XML file can be loaded into rekordbox via its "rekordbox xml" area, and can be generated in two ways depending on how you want to repair your collection and playlists:
     - **Selectively repair tracks in your existing collection and playlists** - A new XML file is generated containing only the tracks the tool was able to repair, and the playlists they belong to.
-    - **Rebuild your entire collection and all playlists** - A new XML file is generated containing your entire collection, including the tracks which the tool was able to repair.  This option is useful if there's a large number of repaired tracks spread over many playlists which would be time-consuming to fix using the first option above. You could also use this option if you've moved your entire music library to another location on your disk, or to another disk, and you need to update your rekordbox collection without losing precious information such as cue points and loops.
+    - **Rebuild your entire collection and all playlists** - A new XML file is generated containing your entire collection, including the tracks which the tool was able to repair.  This option is useful if there's a large number of repaired tracks spread over many playlists which would be too time-consuming to fix using the first option above.
 2. **A detailed report** listing the following issues the tool has detected:
     - Tracks which rekordbox is reporting as "File missing", but which have really just moved location on the disk and can therefore be repaired.
     - Tracks which genuinely do have their file missing, and should therefore be removed from rekordbox.
@@ -15,9 +15,11 @@ rekordbox Repair is a simple command line tool which works on both MacOS and Win
     - Files on disk which haven't been imported into rekordbox yet.
 
 ### Can't rekordbox fix missing files itself?
-rekordbox does have a 'Relocate' tool for repairing tracks with missing files, but it only works for individual tracks one-by-one or, at best, a set of tracks with their files located within the same single folder (e.g. for an album). Since you have to manually tell rekordbox where each missing file is on the disk, if you have 100s of tracks with missing files, that's going to take more patience than any reasonable person has.
+rekordbox does have a 'Relocate' tool for repairing tracks with missing files, which operates either on a track-by-track basis, or on a hierarchy of folders and sub-folders assuming that the only thing that's moved is the top-most folder. For example, if you moved your /Users/You/Music/iTunes folder to a different location, e.g. /Users/You/**Dropbox**/Music/iTunes, without moving anything within the iTunes folder itself, then Relocate should work.
 
-Other products such as Traktor and Serato have better tools for this, where you can specify the root folder of your music then missing files will be searched for within that folder and all of its subfolders. Hopefully Pioneer will do something similar in the future, and make this tool redundant.   
+But in many cases it's not as clean cut as that, and it's probably not realistic to expect users to understand that the structure of their music on disk either needs to be set in stone once imported into rekordbox, or change that structure at their peril and potentially spend hours/days manually relocating files in rekordbox afterwards.
+
+I believe rekordbox should assume files will be moved - for whatever reason, rightly or wrongly - and provide the flexibility to relocate those files wherever they may have ended up. Other products such as Traktor and Serato have better tools for this, where you can specify the root folder of your music then missing files will be searched for within that folder and all of its subfolders. Hopefully Pioneer will do something similar in the future, and make this tool redundant.
 
 ### How do tracks in rekordbox end up with missing files?
 There are various reasons why rekordbox might have tracks with missing files:
