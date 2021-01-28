@@ -54,31 +54,35 @@ object Analyser {
   }
 
   private def locateFile(track: CollectionTrack, searchDirectory: File): LocateFileResult = {
-    val file = track.file
     val logPrefix = track.toString
 
-    if (file.exists()) {
-      log.info(s"$logPrefix - OK")
-      OK(track)
-    } else {
-      log.info(s"$logPrefix - MISSING, searching for file '${file.getName}'...")
+    track.file match {
+      case Some(file) =>
+        if (file.exists()) {
+          log.info(s"$logPrefix - OK")
+          OK(track)
+        } else {
+          log.info(s"$logPrefix - MISSING, searching for file '${file.getName}'...")
 
-      val searchResults = Files.walk(Paths.get(searchDirectory.toURI)).iterator().asScala.toSeq
-        .map(_.toFile)
-        .filter(_.getName == file.getName)
+          val searchResults = Files.walk(Paths.get(searchDirectory.toURI)).iterator().asScala.toSeq
+            .map(_.toFile)
+            .filter(_.getName == file.getName)
 
-      if (searchResults.isEmpty) {
-        log.warn(s"$logPrefix - Couldn't find '${file.getName}', track will remain in rekordbox as a missing file")
-        Missing(track)
-      } else if (searchResults.size == 1) {
-        val relocated = Relocated(track, searchResults.head)
-        log.info(s"$logPrefix - Found one matching filename, relocating in rekordbox to '${searchResults.head.getCanonicalPath}'")
-        relocated
-      } else {
-        val multiple = MultipleLocations(track, searchResults)
-        log.warn(s"$logPrefix - Found more than one matching filename so it's not safe to automatically relocate. Matches were:${OS.newLine}${searchResults.map(_.getCanonicalPath).mkString(OS.newLine)}")
-        multiple
-      }
+          if (searchResults.isEmpty) {
+            log.warn(s"$logPrefix - Couldn't find '${file.getName}', track will remain in rekordbox as a missing file")
+            Missing(track)
+          } else if (searchResults.size == 1) {
+            val relocated = Relocated(track, searchResults.head)
+            log.info(s"$logPrefix - Found one matching filename, relocating in rekordbox to '${searchResults.head.getCanonicalPath}'")
+            relocated
+          } else {
+            val multiple = MultipleLocations(track, searchResults)
+            log.warn(s"$logPrefix - Found more than one matching filename so it's not safe to automatically relocate. Matches were:${OS.newLine}${searchResults.map(_.getCanonicalPath).mkString(OS.newLine)}")
+            multiple
+          }
+        }
+      case None =>
+        Invalid(track)
     }
   }
 
@@ -100,7 +104,7 @@ object Analyser {
           Seq()
       }
     }
-    val collectionFiles = locateResults.map(_.track.file)
+    val collectionFiles = locateResults.flatMap(_.track.file)
     val locateResultFiles = locateResults.flatMap(result => filesFromResult(result))
 
     val notInRekordBox = allFilesInSearchDir.filterNot((collectionFiles ++ locateResultFiles).contains)

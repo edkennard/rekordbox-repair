@@ -22,7 +22,7 @@ object Main {
 
         log.info("Completed successfully")
       case Left(e) =>
-        log.error(s"Failed to complete successfully: ${e.getMessage}${OS.newLine}${e.getStackTrace}")
+        log.error(s"Failed to complete successfully: ${e.getMessage}", e)
         System.exit(-1)
     }
   }

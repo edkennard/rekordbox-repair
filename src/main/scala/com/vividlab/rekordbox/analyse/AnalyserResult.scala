@@ -19,6 +19,7 @@ case class AnalyserResult(
     |Tracks repaired: ${locateFileResults.relocated.size}
     |Tracks with multiple matches: ${locateFileResults.multipleLocations.size}
     |Tracks with missing files: ${locateFileResults.missing.size}
+    |Tracks with invalid paths: ${locateFileResults.invalid.size}
     |Tracks with path too long: ${filesWithPathTooLong.size}
     |Tracks on disk but not in rekordbox: ${filesNotInRekordBox.size}
     |""".stripMargin
@@ -33,6 +34,7 @@ case class AnalyserResult(
       .replace("{tracks-repaired}", locateFileResults.relocated.map(_.toString).mkString(OS.newLine))
       .replace("{tracks-multiple-matches}", locateFileResults.multipleLocations.map(_.toString).mkString(OS.newLine))
       .replace("{tracks-missing}", locateFileResults.missing.map(_.toString).mkString(OS.newLine))
+      .replace("{tracks-invalid-path}", locateFileResults.invalid.map(_.toString).mkString(OS.newLine))
       .replace("{tracks-path-too-long}", filesWithPathTooLong.map(_.getAbsolutePath).mkString(OS.newLine))
       .replace("{tracks-not-in-rekordbox}", filesNotInRekordBox.map(_.getAbsolutePath).mkString(OS.newLine))
 }
