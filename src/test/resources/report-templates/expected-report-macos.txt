@@ -3,11 +3,12 @@ rekordbox Repair Report
 
 Summary
 
-Total tracks in collection: 7
+Total tracks in collection: 8
 Tracks OK: 2
 Tracks repaired: 3
 Tracks with multiple matches: 1
 Tracks with missing files: 1
+Tracks with invalid paths: 1
 Tracks with path too long: 1
 Tracks on disk but not in rekordbox: 2
 
@@ -50,6 +51,15 @@ The files for the following tracks couldn't be found anywhere in the specified s
 
 No Artist - No Album - 'NOISE'
 Missing: {testLibraryDirectory}/PioneerDJ/Sampler/OSC_SAMPLER/PRESET ONESHOT/NOISE.wav
+
+
+
+Tracks with invalid locations
+
+The following tracks couldn't be analysed or repaired because the file locations specified in the rekordbox XML library file were in some way invalid, e.g. contained a raw question mark.  For these files the fix is to remove them from your rekordbox collection then re-import them:
+
+No Artist - No Album - 'Question Mark Track'
+Invalid: file://localhost/Name%20with%20?.mp3
 
 
 

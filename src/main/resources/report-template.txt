@@ -26,6 +26,13 @@ The files for the following tracks couldn't be found anywhere in the specified s
 {tracks-missing}
 
 
+Tracks with invalid locations
+
+The following tracks couldn't be analysed or repaired because the file locations specified in the rekordbox XML library file were in some way invalid, e.g. contained a raw question mark.  For these files the fix is to remove them from your rekordbox collection then re-import them:
+
+{tracks-invalid-path}
+
+
 Tracks with path too long
 
 rekordbox has a limit of 255 characters for the full path to a track's file, e.g. "/Users/User/Music/Library/Artist/Album/Music File.mp3" is 53 characters long.  The following files exceed that limit and therefore can't be imported to rekordbox:
