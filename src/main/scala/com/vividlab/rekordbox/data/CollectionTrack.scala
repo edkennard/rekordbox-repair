@@ -14,8 +14,8 @@ case class CollectionTrack(
   location: String
 ) {
   override def toString: String = {
-    val artistName = if (artist.length > 0) s"'$artist'" else "No Artist"
-    val albumName = if (album.length > 0) s"'$album'" else "No Album"
+    val artistName = if (artist.nonEmpty) s"'$artist'" else "No Artist"
+    val albumName = if (album.nonEmpty) s"'$album'" else "No Album"
     s"$artistName - $albumName - '$name'"
   }
 

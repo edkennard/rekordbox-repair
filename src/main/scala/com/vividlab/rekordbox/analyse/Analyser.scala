@@ -27,10 +27,12 @@ object Analyser {
       log.info(s"Checking playlists...")
       RootPlaylist.fromXml(inputXml)
 
-      log.info(s"Locating files referenced by tracks in the collection...")
-      val locateResults = locateFiles(tracks, config.searchDirectory)
-
+      log.info(s"Listing audio and video files in the search directory (${FileUtils.supportedTypes.mkString(", ")})...")
       val allFilesInSearchDir = FileUtils.allSupportedFilesInDir(config.searchDirectory)
+      log.info(s"Found ${allFilesInSearchDir.size} audio and video files in the search directory")
+
+      log.info(s"Locating files referenced by tracks in the collection...")
+      val locateResults = locateFiles(tracks, allFilesInSearchDir)
 
       log.info(s"Checking for files in the search directory which don't exist in rekordbox...")
       val notInRekordBox = filesNotInRekordBox(allFilesInSearchDir, locateResults.results)
@@ -47,13 +49,13 @@ object Analyser {
     }
   }
 
-  private def locateFiles(tracks: Seq[CollectionTrack], searchDirectory: File): LocateFileResults = {
+  private def locateFiles(tracks: Seq[CollectionTrack], files: Seq[File]): LocateFileResults = {
     LocateFileResults(
-      tracks.map(locateFile(_, searchDirectory))
+      tracks.map(locateFile(_, files))
     )
   }
 
-  private def locateFile(track: CollectionTrack, searchDirectory: File): LocateFileResult = {
+  private def locateFile(track: CollectionTrack, files: Seq[File]): LocateFileResult = {
     val logPrefix = track.toString
 
     track.file match {
@@ -63,10 +65,7 @@ object Analyser {
           OK(track)
         } else {
           log.info(s"$logPrefix - MISSING, searching for file '${file.getName}'...")
-
-          val searchResults = Files.walk(Paths.get(searchDirectory.toURI)).iterator().asScala.toSeq
-            .map(_.toFile)
-            .filter(_.getName == file.getName)
+          val searchResults = files.filter(_.getName == file.getName)
 
           if (searchResults.isEmpty) {
             log.warn(s"$logPrefix - Couldn't find '${file.getName}', track will remain in rekordbox as a missing file")
