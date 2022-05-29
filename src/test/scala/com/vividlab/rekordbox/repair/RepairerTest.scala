@@ -2,11 +2,12 @@ package com.vividlab.rekordbox.repair
 
 import com.vividlab.rekordbox.analyse.Analyser
 import com.vividlab.rekordbox.{Config, TestData, TestUtils}
-import org.scalatest.{FreeSpec, Matchers}
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.xml.XML
 
-class RepairerTest extends FreeSpec with Matchers with TestData with TestUtils {
+class RepairerTest extends AnyFreeSpec with Matchers with TestData with TestUtils {
 
   "Rewrite entire rekordbox XML file with repaired tracks" in {
     val config = Config(Array(

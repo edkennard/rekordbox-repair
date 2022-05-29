@@ -7,7 +7,7 @@ import com.vividlab.rekordbox.{Config, FileUtils, OS}
 import com.vividlab.rekordbox.data.{CollectionTrack, CollectionTracks, RootPlaylist}
 import org.slf4j.LoggerFactory
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.xml.XML
 
 object Analyser {

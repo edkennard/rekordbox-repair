@@ -1,12 +1,13 @@
 package com.vividlab.rekordbox.analyse
 
-import com.vividlab.rekordbox.{Config, FileUtils, OS, TestData, TestUtils}
-import org.scalatest.{FreeSpec, Matchers}
+import com.vividlab.rekordbox._
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.should.Matchers
 import org.slf4j.LoggerFactory
 
 import scala.io.Source
 
-class AnalyserTest extends FreeSpec with Matchers with TestData with TestUtils {
+class AnalyserTest extends AnyFreeSpec with Matchers with TestData with TestUtils {
   private val log = LoggerFactory.getLogger(getClass)
 
   "Analyse a broken rekordbox library" in {
@@ -44,8 +45,8 @@ class AnalyserTest extends FreeSpec with Matchers with TestData with TestUtils {
         val expectedReportSource = Source.fromFile(expectedReportFile)
         val actualReportSource = Source.fromFile(fixedLibraryReportFile)
 
-        val expectedReportText = expectedReportSource.getLines.mkString(OS.newLine)
-        val actualReportText = actualReportSource.getLines.mkString(OS.newLine)
+        val expectedReportText = expectedReportSource.getLines().mkString(OS.newLine)
+        val actualReportText = actualReportSource.getLines().mkString(OS.newLine)
 
         expectedReportSource.close()
         actualReportSource.close()

@@ -5,7 +5,6 @@ import java.io.File
 import com.vividlab.rekordbox.OS
 import com.vividlab.rekordbox.data.CollectionTrack
 
-import scala.collection.breakOut
 import scala.reflect.ClassTag
 
 sealed trait LocateFileResult {
@@ -40,9 +39,9 @@ case class MultipleLocations(track: CollectionTrack, newFiles: Seq[File]) extend
 
 case class LocateFileResults(results: Seq[LocateFileResult]) {
 
-  implicit class RichTraversable[A](collection: Traversable[A]) {
+  implicit class RichTraversable[A](collection: Iterable[A]) {
     def filterOnType[T <: A](implicit t: ClassTag[T]): Vector[T] = {
-      collection.filter(a => t.runtimeClass.isAssignableFrom(a.getClass)).map(_.asInstanceOf[T])(breakOut)
+      collection.toVector.collect { case a: T => a }
     }
   }
 
