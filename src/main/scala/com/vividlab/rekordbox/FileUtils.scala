@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory
 object FileUtils {
   private val log = LoggerFactory.getLogger(getClass)
 
+  val supportedTypes = Seq("mp3", "m4a", "aac", "aif", "aiff", "fla", "flac", "wav", "avi", "mpg", "mp4", "m4v", "mov", "qtz")
+
   /**
     * A location in rekordbox format ready to write out to XML with any special characters such as spaces encoded
     * to %20, and the rekordbox non-standard format for the host 'localhost':
@@ -43,8 +45,6 @@ object FileUtils {
     * For more detail on rekordbox's supported formats, see pages 196 and 197 of https://rekordbox.com/_app/files/img/rekordbox5.5.0_manual_EN.pdf
     */
   def allSupportedFilesInDir(rootDir: File): Seq[File] = {
-    val supportedTypes = Seq("mp3", "mp4", "m4a", "aif", "aiff", "fla", "flac", "wav")
-
     def supported(filename: String): Boolean = supportedTypes.exists { st => filename.toLowerCase.endsWith(s".$st") }
 
     def recursiveFilesInDir(dir: File): Array[File] = {

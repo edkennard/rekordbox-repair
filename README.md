@@ -1,9 +1,9 @@
 ## rekordbox Repair
 
 ### Introduction
-rekordbox Repair is designed to help users of Pioneer's rekordbox DJ software fix problems with their rekordbox collections, as well as keep them clean on an ongoing basis. I wrote it as part of some consulting work helping George Evelyn a.k.a. [Nightmares on Wax](https://nightmaresonwax.com) sort out his studio and DJ'ing computers. George has a MacOS rekordbox collection of around 7200 tracks and counting, so it's against that that this tool has initially been battle-tested.
+rekordbox Repair is designed to help users of Pioneer's rekordbox DJ software fix problems with their rekordbox collections, as well as keep them clean on an ongoing basis. I wrote it while helping George Evelyn a.k.a. [Nightmares on Wax](https://nightmaresonwax.com) sort out his studio and DJ'ing computers. George has a macOS rekordbox collection of around 7200 tracks and counting, so it's against that this tool has initially been battle-tested.
 
-rekordbox Repair is a simple command line tool which works on both MacOS and Windows. It analyses an exported rekordbox collection in XML format, searches the folder on disk where your music files live, then produces the following two files:
+rekordbox Repair is a simple command line tool which works on both macOS and Windows. It analyses an exported rekordbox collection in XML format, searches the folder on disk where your music files live, then produces the following two files:
 
 1. **A new rekordbox XML file** containing the repaired tracks with their correct file locations, original cue points and loops, and the playlists they belong to. This XML file can be loaded into rekordbox via its "rekordbox xml" area, and can be generated in two ways depending on how you want to repair your collection and playlists:
     - **Selectively repair tracks in your existing collection and playlists** - A new XML file is generated containing only the tracks the tool was able to repair, and the playlists they belong to.
@@ -11,15 +11,17 @@ rekordbox Repair is a simple command line tool which works on both MacOS and Win
 2. **A detailed report** listing the following issues the tool has detected:
     - Tracks which rekordbox is reporting as "File missing", but which have really just moved location on the disk and can therefore be repaired.
     - Tracks which genuinely do have their file missing, and should therefore be removed from rekordbox.
-    - Files on disk which can't be imported to rekordbox because the full path to their location exceeds rekordbox's 255 character limit (only applies to MacOS)
+    - Files on disk which can't be imported to rekordbox because the full path to their location exceeds rekordbox's 255 character limit (only applies to macOS)
     - Files on disk which haven't been imported into rekordbox yet.
 
 ### Can't rekordbox fix missing files itself?
-rekordbox does have a 'Relocate' tool for repairing tracks with missing files, which operates either on a track-by-track basis, or on a hierarchy of folders and sub-folders assuming that the only thing that's moved is the top-most folder. For example, if you moved your /Users/You/Music/iTunes folder to a different location, e.g. /Users/You/**Dropbox**/Music/iTunes, without moving anything within the iTunes folder itself, then Relocate should work.
+In rekordbox 5, the version I was originally working against, there is a 'Relocate' tool for repairing tracks with missing files which operates either on a track-by-track basis, or on a hierarchy of folders and sub-folders assuming that the only thing that's moved is the top-most folder. For example, if you moved your /Users/You/Music/iTunes folder to a different location, e.g. /Users/You/**Dropbox**/Music/iTunes, without moving anything within the iTunes folder itself, then Relocate should work.
 
-But in many cases it's not as clean cut as that, and it's probably not realistic to expect users to understand that the structure of their music on disk either needs to be set in stone once imported into rekordbox, or change that structure at their peril and potentially spend hours/days manually relocating files in rekordbox afterwards.
+Since I originally developed this tool, rekordbox 6 was released. The 'Relocate' tool still exists, plus a new 'Relocate All' tool has been added which is a big improvement and would ideally make my tool here redundant. Users can configure multiple library folders on their computer to scan, then any files which have been moved around will be repaired automatically.
 
-I believe rekordbox should assume files will be moved - for whatever reason, rightly or wrongly - and provide the flexibility to relocate those files wherever they may have ended up. Other products such as Traktor and Serato have better tools for this, where you can specify the root folder of your music then missing files will be searched for within that folder and all of its subfolders. Hopefully Pioneer will do something similar in the future, and make this tool redundant.
+For now (May 2022), rekordbox Repair still offers at least two advantages:
+   - rekordbox's 'Relocate All' tool ignores duplicate matches for a given track, and will just do a repair against the first match it finds, a risky strategy which could easily make a big mess. For example, if you have two albums, Artist 1/Album 1/Track 1.mp3 and Artist 2/Album 2/Track 1.mp3, rekordbox may incorrectly repair those, getting the `Track 1.mp3` mixed up between the two albums. rekordbox Repair will not attempt to repair this situation - instead you'll be told there were duplicates and be given a list of them, so you can deal with them manually. That can be a chore if there are a lot of duplicates, but it is a much safer approach.
+   - rekordbox's 'Relocate All' tool doesn't give you a list of files on disk which haven't been imported into rekordbox yet. This is useful since you may have files lurking in your library which either should be in rekordbox but somehow got missed, or shouldn't be there and can be safely deleted.
 
 ### How do tracks in rekordbox end up with missing files?
 There are various reasons why rekordbox might have tracks with missing files:
@@ -27,6 +29,63 @@ There are various reasons why rekordbox might have tracks with missing files:
 - If you use a music library manager such as iTunes or Swinsian and have the "Keep library folder organised" option switched on. Whenever you edit a track's artist or album name, e.g. from "Incorrect Artist" to "Correct Artist" and from "Incorrect Album" to "Correct Album", the related file will be moved from the folder /Incorrect Artist/Incorrect Album to a new folder /Correct Artist/Correct Album, breaking rekordbox's reference to the file.
 - If you imported tracks directly from an external device (e.g. an external drive or USB stick), but that device isn't connected anymore.
 - The files have genuinely been deleted from your disk.
+
+### How to install in macOS
+- Download the latest release from the [Releases](https://github.com/edkennard/rekordbox-repair/releases) page.
+- Double-click the downloaded file to extract the tool into a folder, e.g. `rekordbox-repair-0.3`
+- Move the extracted `rekordbox-repair-0.3` folder wherever you wish on your disk. The recommended location is `/Users/You/Applications/rekordbox-repair-0.3`
+- Check your installation is working by opening a Terminal window via Applications/Utilities/Terminal.app then enter two commands per below:
+```bash
+DJLaptop:~ You$ cd "/Users/You/Applications/rekordbox-repair-0.3"
+
+DJLaptop:rekordbox-repair-0.3$ bin/rekordbox-repair --help
+```
+- The tool should output its help output per the "Help" section below.
+
+### How to install in Windows
+- Download the latest release from the [Releases](https://github.com/edkennard/rekordbox-repair/releases) page.
+- Double-click the downloaded file then follow the steps in the setup wizard.
+- Check your installation is working by opening a Command Prompt window via Start Menu... Windows System... Command Prompt then enter this command:
+```bash
+C:\Users\You> rekordbox-repair --help
+```
+- The tool should output its help output per the "Help" section below.
+
+### Help
+Calling the tool with the "--help" option will give you the following info:
+```bash
+Usage: rekordbox-repair [options]
+  
+  -i, --input-xml-file <file>
+                           Input rekordbox XML file to analyse, e.g. '-i /Users/You/Documents/rekordbox/library.xml'
+  -o, --output-xml-file <file>
+                           Output rekordbox XML file to write repaired version to, e.g. '-o /Users/You/Documents/rekordbox/library-fixed.xml'
+  -s, --search-directory <file>
+                           Directory to search for missing files to relocate, e.g. '-s /Users/You/Music/iTunes'
+  -r, --output-repaired-tracks-only <boolean>
+                           Only write repaired tracks to the output rekordbox XML file, rather than the entire library. By default set to true, set to false if you want to write everything in order to rebuild your entire library
+  --help                   Prints this usage text
+```
+
+### How to use in macOS
+- Export your rekordbox collection to an XML file.  This can be done via rekordbox's File menu... "Export Collection in xml format" tool.  A recommended location to save this is `/Users/You/Documents/rekordbox/library.xml`
+- Open a Terminal window via Applications/Utilities/Terminal.app
+- Change to the rekordbox Repair folder (example assumes the location is `/Users/You/Applications/rekordbox-repair-0.3`:
+```bash
+DJLaptop:~ You$ cd "/Users/You/Applications/rekordbox-repair-0.3"
+```
+- Run the tool, adjusting the values according to your own computer's disk locations:
+```bash
+DJLaptop:rekordbox-repair-0.3 You$ bin/rekordbox-repair -i "/Users/You/Documents/rekordbox/original-library.xml" -o "/Users/You/Documents/rekordbox/fixed-library.xml" -s "/Users/You/Music/iTunes"
+```
+
+### How to use in Windows
+- Export your rekordbox collection to an XML file.  This can be done via rekordbox's File menu... "Export Collection in xml format" tool.  A recommended location to save this is `C:\Users\You\Documents\rekordbox\library.xml`
+- Open a Command Prompt window via Start Menu... Windows System... Command Prompt
+- Run the tool, adjusting the values according to your own computer's files and folders:
+```bash
+C:\Users\You> rekordbox-repair -i "C:\Users\You\Documents\rekordbox\original-library.xml" -o "C:\Users\You\Documents\rekordbox\fixed-library.xml" -s "C:\Users\You\Music\iTunes"
+```
 
 ### rekordbox Repair in action
 To demonstrate how this tool can be used to clean up a rekordbox collection, here is a working example with a deliberately broken collection and the complete sequence of steps that were taken to fix all the various issues.
@@ -251,66 +310,8 @@ Tracks on disk but not in rekordbox: 0
 *******************************************
 ``` 
 
-
-### How to install in MacOS
-- Download the latest release from https://github.com/edkennard/rekordbox-repair/releases.
-- Double-click the downloaded file to extract the tool into a folder "rekordbox-repair-0.1"
-- Move the extracted "rekordbox-repair-0.1" folder wherever you wish on your disk. The recommended location is "/Users/You/Applications/rekordbox-repair-0.1"
-- Check your installation is working by opening a Terminal window via Applications/Utilities/Terminal.app then enter two commands per below:
-```bash
-DJLaptop:~ You$ cd "/Users/You/Applications/rekordbox-repair-0.1"
-
-DJLaptop:rekordbox-repair-0.1$ bin/rekordbox-repair --help
-```
-- The tool should output its help output per the "Help" section below.
-
-### How to install in Windows
-- Download the latest release from https://github.com/edkennard/rekordbox-repair/releases.
-- Double-click the downloaded file then follow the steps in the setup wizard.
-- Check your installation is working by opening a Command Prompt window via Start Menu... Windows System... Command Prompt then enter this command:
-```bash
-C:\Users\You> rekordbox-repair --help
-```
-- The tool should output its help output per the "Help" section below.
-
-### Help
-Calling the tool with the "--help" option will give you the following info:
-```bash
-Usage: rekordbox-repair [options]
-  
-  -i, --input-xml-file <file>
-                           Input rekordbox XML file to analyse, e.g. '-i /Users/You/Documents/rekordbox/library.xml'
-  -o, --output-xml-file <file>
-                           Output rekordbox XML file to write repaired version to, e.g. '-o /Users/You/Documents/rekordbox/library-fixed.xml'
-  -s, --search-directory <file>
-                           Directory to search for missing files to relocate, e.g. '-s /Users/You/Music/iTunes'
-  -r, --output-repaired-tracks-only <boolean>
-                           Only write repaired tracks to the output rekordbox XML file, rather than the entire library. By default set to true, set to false if you want to write everything in order to rebuild your entire library
-  --help                   Prints this usage text
-```
-
-### How to use in MacOS
-- Export your rekordbox collection to an XML file.  This can be done via rekordbox's File menu... "Export Collection in xml format" tool.  A recommended location to save this is "/Users/You/Documents/rekordbox/library.xml"
-- Open a Terminal window via Applications/Utilities/Terminal.app
-- Change to the rekordbox Repair folder (example assumes the location is "/Users/You/Applications/rekordbox-repair-0.1":
-```bash
-DJLaptop:~ You$ cd "/Users/You/Applications/rekordbox-repair-0.1"
-```
-- Run the tool, adjusting the values according to your own computer's disk locations:
-```bash
-DJLaptop:rekordbox-repair-0.1 You$ bin/rekordbox-repair -i "/Users/You/Documents/rekordbox/original-library.xml" -o "/Users/You/Documents/rekordbox/fixed-library.xml" -s "/Users/You/Music/iTunes"
-```
-
-### How to use in Windows
-- Export your rekordbox collection to an XML file.  This can be done via rekordbox's File menu... "Export Collection in xml format" tool.  A recommended location to save this is "C:\Users\You\Documents\rekordbox\library.xml"
-- Open a Command Prompt window via Start Menu... Windows System... Command Prompt
-- Run the tool, adjusting the values according to your own computer's files and folders:
-```bash
-C:\Users\You> rekordbox-repair -i "C:\Users\You\Documents\rekordbox\original-library.xml" -o "C:\Users\You\Documents\rekordbox\fixed-library.xml" -s "C:\Users\You\Music\iTunes"
-```
-
 ### Future plans
-- In the interest of expediency I wrote this initial version as a command line tool only, but with more time it would be better to build a full-blown user interface for it and package as a MacOS app which can be installed into the main Applications area, and a Windows app which can be installed into the Start Menu etc.
+- In the interest of expediency I wrote this initial version as a command line tool only, but with more time it would be better to build a full-blown user interface for it and package as a macOS app which can be installed into the main Applications area, and a Windows app which can be installed into the Start Menu etc.
 - Add support for specifying multiple search directories rather than only one. For some people their collections exist across multiple disks.
 - Implement a more intelligent search for missing files where the file may have changed name but it can still be matched based on other criteria, e.g. file size, metadata, the names of its parent folders, the Levenshtein distance between the original filename and the new filename, etc.
 - Is there anything you think should be added, changed or fixed? Please submit your thoughts to the [Issues](https://github.com/edkennard/rekordbox-repair/issues) area.
