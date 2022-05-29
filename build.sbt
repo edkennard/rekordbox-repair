@@ -3,7 +3,7 @@ import NativePackagerHelper._
 enablePlugins(SbtLicenseReport, JavaAppPackaging, WindowsPlugin)
 
 name := "rekordbox-repair"
-version := "0.2"
+version := "0.3"
 scalaVersion := "2.12.8"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
