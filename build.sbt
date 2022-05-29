@@ -4,13 +4,18 @@ enablePlugins(SbtLicenseReport, JavaAppPackaging, WindowsPlugin)
 
 name := "rekordbox-repair"
 version := "0.3"
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.8"
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  "-Xfatal-warnings",
+)
 
-libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
-libraryDependencies += "com.github.scopt" %% "scopt" % "3.7.1"
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % Test
-
+libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.1.0"
+libraryDependencies += "com.github.scopt" %% "scopt" % "4.0.1"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.11"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.11" % Test
 
 // Packaging config and mappings
 //
@@ -25,7 +30,7 @@ val osName = System.getProperty("os.name").toLowerCase
 val isMac = osName.startsWith("mac")
 val isWindows = osName.startsWith("win")
 
-mappings in Universal ++= {
+Universal / mappings ++= {
   val jreDir = if (isMac)
     Path("/Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre").asFile
   else if (isWindows)
@@ -41,7 +46,7 @@ mappings in Universal ++= {
   directory(jreDir)
 }
 
-mappings in Universal ++= {
+Universal / mappings ++= {
   val licenseReportsDir = target.value / "license-reports"
   streams.value.log.info(s"Adding license reports to package from $licenseReportsDir...")
   directory(licenseReportsDir)
@@ -54,11 +59,11 @@ val nonWindowsJavaHome = if (!isWindows)
 else
   Seq()
 
-javaOptions in Universal ++= nonWindowsJavaHome
+Universal / javaOptions ++= nonWindowsJavaHome
 
 
 // Windows packaging using WIX toolset
-name in Windows := s"rekordbox-repair-${version.value}" // Name of generated MSI file
+Windows / name := s"rekordbox-repair-${version.value}" // Name of generated MSI file
 wixProductLicense := Some(new sbt.File("LICENSE.rtf"))
 
 makeBatScripts := {

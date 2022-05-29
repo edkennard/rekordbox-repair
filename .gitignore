@@ -1,6 +1,9 @@
 *.class
 *.log
 
+# SBT
+.bsp/
+
 target/
 
 # IntelliJ IDEA

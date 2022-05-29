@@ -4,7 +4,7 @@ import com.vividlab.rekordbox.analyse.{LocateFileResult, LocateFileResults, Relo
 import com.vividlab.rekordbox.data.Playlist
 import com.vividlab.rekordbox.{Config, FileUtils}
 
-import scala.language.implicitConversions
+import scala.language.{implicitConversions, reflectiveCalls}
 import scala.xml._
 import scala.xml.transform.RewriteRule
 
@@ -97,7 +97,7 @@ class RekordBoxRewriteRule(
     }
   }
 
-  private def rewriteAttribute(e: Elem, attributeName: String, newValue: String) = {
+  private def rewriteAttribute(e: Elem, attributeName: String, newValue: String): Elem = {
     e.copy(attributes = e.attributes.map {
       case attr@Attribute(attrName, _, _) if attrName == attributeName =>
         attr.pimpedCopy(value = newValue)

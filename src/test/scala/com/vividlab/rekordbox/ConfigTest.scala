@@ -1,10 +1,12 @@
 package com.vividlab.rekordbox
 
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.should.Matchers
+
 import java.io.File
 
-import org.scalatest.{FreeSpec, Matchers}
 
-class ConfigTest extends FreeSpec with Matchers with TestData {
+class ConfigTest extends AnyFreeSpec with Matchers with TestData {
 
   "Valid arguments" in {
     val args: Array[String] = Array(

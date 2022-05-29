@@ -47,8 +47,8 @@ object FileUtils {
   def allSupportedFilesInDir(rootDir: File): Seq[File] = {
     def supported(filename: String): Boolean = supportedTypes.exists { st => filename.toLowerCase.endsWith(s".$st") }
 
-    def recursiveFilesInDir(dir: File): Array[File] = {
-      val files = dir.listFiles
+    def recursiveFilesInDir(dir: File): Seq[File] = {
+      val files = dir.listFiles.toIndexedSeq
       files.filter(f => supported(f.getName)) ++ files.filter(_.isDirectory).flatMap(recursiveFilesInDir)
     }
 
