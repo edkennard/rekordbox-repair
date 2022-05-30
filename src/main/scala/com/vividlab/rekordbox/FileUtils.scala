@@ -1,10 +1,11 @@
 package com.vividlab.rekordbox
 
-import java.io.{BufferedWriter, File, FileWriter}
-import java.net.URI
-
 import com.vividlab.rekordbox.analyse.AnalyserResult
 import org.slf4j.LoggerFactory
+
+import java.io.{BufferedWriter, File, FileWriter}
+import java.net.URI
+import java.nio.file.AccessDeniedException
 
 object FileUtils {
   private val log = LoggerFactory.getLogger(getClass)
@@ -48,10 +49,20 @@ object FileUtils {
     def supported(filename: String): Boolean = supportedTypes.exists { st => filename.toLowerCase.endsWith(s".$st") }
 
     def recursiveFilesInDir(dir: File): Seq[File] = {
-      val files = dir.listFiles.toIndexedSeq
+      val files = try {
+        dir.listFiles.toIndexedSeq
+      } catch {
+        case _: AccessDeniedException =>
+          log.info(s"Ignoring directory ${dir.getAbsolutePath}, access was denied")
+          Nil
+        case e: Throwable =>
+          log.info(s"Ignoring directory ${dir.getAbsolutePath}, read failed with error '$e'")
+          Nil
+      }
+      // We could also filter by canRead here, in addition to isDirectory, but it's better to catch exceptions above and
+      // report them to the user, in case a directory is being ignored which they would expect to be included
       files.filter(f => supported(f.getName)) ++ files.filter(_.isDirectory).flatMap(recursiveFilesInDir)
     }
-
     recursiveFilesInDir(rootDir).filterNot(_.isDirectory)
   }
 
