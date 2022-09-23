@@ -3,7 +3,7 @@ import NativePackagerHelper._
 enablePlugins(SbtLicenseReport, JavaAppPackaging, WindowsPlugin)
 
 name := "rekordbox-repair"
-version := "0.4"
+version := "0.9"
 scalaVersion := "2.13.8"
 scalacOptions ++= Seq(
   "-deprecation",

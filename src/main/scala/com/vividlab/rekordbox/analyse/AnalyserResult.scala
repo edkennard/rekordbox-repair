@@ -31,7 +31,7 @@ case class AnalyserResult(
   def reportText(): String =
     Source.fromResource(s"report-template.txt").getLines().mkString(OS.newLine)
       .replace("{summary}", summary)
-      .replace("{tracks-repaired}", locateFileResults.relocated.map(_.toString).mkString(OS.newLine))
+      .replace("{tracks-repaired}", locateFileResults.relocated.map(item => if (item.toString.nonEmpty) item.toString + OS.newLine else "").mkString(""))
       .replace("{tracks-multiple-matches}", locateFileResults.multipleLocations.map(_.toString).mkString(OS.newLine))
       .replace("{tracks-missing}", locateFileResults.missing.map(_.toString).mkString(OS.newLine))
       .replace("{tracks-invalid-path}", locateFileResults.invalid.map(_.toString).mkString(OS.newLine))

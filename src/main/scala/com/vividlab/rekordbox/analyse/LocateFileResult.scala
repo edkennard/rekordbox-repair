@@ -30,8 +30,14 @@ case class Relocated(track: CollectionTrack, newFile: File) extends LocateFileRe
     //s"$track${OS.newLine}Old: ${track.filePath.getOrElse("File path missing")}${OS.newLine}New: ${newFile.getAbsolutePath}${OS.newLine}" +
 
     // Generate revert command
-    val revertDir = track.filePath.get.substring(0, track.filePath.get.lastIndexOf("/"))
-    s"mv ${newFile.getAbsolutePath}  $revertDir${OS.newLine}"
+    val revertDir = track.filePath.get
+      .substring(0, track.filePath.get.lastIndexOf("/"))
+      .replace("/Users/georgeevelyn/", "/Users/ease/")
+
+    if (newFile.getAbsolutePath.contains("/Unknown Artist/Unknown Album") && !revertDir.endsWith("/Unknown Artist/Unknown Album"))
+      s"mkdir -p -- \"$revertDir\"${OS.newLine}mv \"${newFile.getAbsolutePath}\" \"$revertDir\""
+    else
+      ""
   }
 }
 
