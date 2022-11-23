@@ -64,6 +64,12 @@
                BitRate="2116" SampleRate="44100" Comments="" PlayCount="0" Rating="0"
                Location="file://localhost/Name%20with%20?.mp3"
                Remixer="" Tonality="" Label="" Mix=""/>
+        <TRACK TrackID="9" Name="SoundCloud Plugin Track" Artist="" Composer="" Album="" Grouping=""
+               Genre="" Kind="WAV File" Size="2345345" TotalTime="7" DiscNumber="0"
+               TrackNumber="0" Year="0" AverageBpm="0.00" DateAdded="2019-05-30"
+               BitRate="2116" SampleRate="44100" Comments="" PlayCount="0" Rating="0"
+               Location="file://localhost/soundcloud:tracks:1149223021"
+               Remixer="" Tonality="" Label="" Mix=""/>
     </COLLECTION>
     <PLAYLISTS>
         <NODE Type="0" Name="ROOT" Count="3">

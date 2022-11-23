@@ -3,12 +3,12 @@ rekordbox Repair Report
 
 Summary
 
-Total tracks in collection: 8
+Total tracks in collection: 9
 Tracks OK: 2
 Tracks repaired: 3
 Tracks with multiple matches: 1
 Tracks with missing files: 1
-Tracks with invalid paths: 1
+Tracks with invalid paths: 2
 Tracks with path too long: 0
 Tracks on disk but not in rekordbox: 1
 
@@ -60,6 +60,9 @@ The following tracks couldn't be analysed or repaired because the file locations
 
 No Artist - No Album - 'Question Mark Track'
 Invalid: file://localhost/Name%20with%20?.mp3
+
+No Artist - No Album - 'SoundCloud Plugin Track'
+Invalid: file://localhost/soundcloud:tracks:1149223021
 
 
 

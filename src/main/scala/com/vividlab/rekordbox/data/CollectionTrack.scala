@@ -19,16 +19,8 @@ case class CollectionTrack(
     s"$artistName - $albumName - '$name'"
   }
 
-  val file: Option[File] = try {
-    Some(FileUtils.fileFromLocation(location))
-  } catch {
-    case _: Throwable =>
-      // Swallow exceptions while trying to read them from the given location - urls with non-escaped characters have
-      // been experienced e.g. question marks, and we don't want one malformed url to cause the whole process to fail
-      None
-  }
-
-  val filePath: Option[String] = file.map(_.getCanonicalPath)
+  val file: Option[File] = FileUtils.fileFromLocation(location)
+  val filePath: Option[String] = file.flatMap(FileUtils.fileCanonicalPath)
 }
 
 object CollectionTrack {
