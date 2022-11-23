@@ -58,8 +58,8 @@ object Analyser {
   private def locateFile(track: CollectionTrack, files: Seq[File]): LocateFileResult = {
     val logPrefix = track.toString
 
-    track.file match {
-      case Some(file) =>
+    (track.file, track.filePath) match {
+      case (Some(file), Some(_)) =>
         if (file.exists()) {
           log.info(s"$logPrefix - OK")
           OK(track)
@@ -80,7 +80,7 @@ object Analyser {
             multiple
           }
         }
-      case None =>
+      case _ =>
         Invalid(track)
     }
   }

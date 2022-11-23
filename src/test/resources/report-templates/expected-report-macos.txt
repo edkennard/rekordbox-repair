@@ -3,11 +3,11 @@ rekordbox Repair Report
 
 Summary
 
-Total tracks in collection: 8
+Total tracks in collection: 9
 Tracks OK: 2
 Tracks repaired: 3
 Tracks with multiple matches: 1
-Tracks with missing files: 1
+Tracks with missing files: 2
 Tracks with invalid paths: 1
 Tracks with path too long: 1
 Tracks on disk but not in rekordbox: 2
@@ -51,6 +51,9 @@ The files for the following tracks couldn't be found anywhere in the specified s
 
 No Artist - No Album - 'NOISE'
 Missing: {testLibraryDirectory}/PioneerDJ/Sampler/OSC_SAMPLER/PRESET ONESHOT/NOISE.wav
+
+No Artist - No Album - 'SoundCloud Plugin Track'
+Missing: /soundcloud:tracks:1149223021
 
 
 

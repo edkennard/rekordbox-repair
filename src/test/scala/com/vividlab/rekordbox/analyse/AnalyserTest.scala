@@ -25,12 +25,15 @@ class AnalyserTest extends AnyFreeSpec with Matchers with TestData with TestUtil
         lr.ok.size shouldBe 2
         lr.relocated.size shouldBe 3
         lr.multipleLocations.size shouldBe 1
-        lr.missing.size shouldBe 1
 
         if (OS.isMac) {
+          lr.missing.size shouldBe 2
+          lr.invalid.size shouldBe 1
           result.filesNotInRekordBox.size shouldBe 2
           result.filesWithPathTooLong.size shouldBe 1
         } else {
+          lr.missing.size shouldBe 1
+          lr.invalid.size shouldBe 2
           result.filesNotInRekordBox.size shouldBe 1
           result.filesWithPathTooLong.size shouldBe 0
         }

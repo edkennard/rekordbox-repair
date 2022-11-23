@@ -33,11 +33,33 @@ object FileUtils {
     *
     * @param location A location in rekordbox format extracted from XML
     */
-  def fileFromLocation(location: String): File =
-    new File(new URI(location
-      .replace("file://localhost/", "file:///")
-      .replace("#", "%23")
-    ))
+  def fileFromLocation(location: String): Option[File] = {
+    try {
+      Some(new File(new URI(location
+        .replace("file://localhost/", "file:///")
+        .replace("#", "%23")
+      )))
+    } catch {
+      case e: Throwable =>
+        // Swallow exceptions while trying to read them from the given location - urls with non-escaped characters have
+        // been experienced e.g. question marks, and we don't want one malformed url to cause the whole process to fail
+        log.error(s"Ignoring invalid file location $location, failed to read with error: ${e.getMessage}")
+        None
+    }
+  }
+
+  /**
+    * Safely retrieve the file system path for a given file, swallowing any exceptions and outputting them to the console
+    */
+  def fileCanonicalPath(file: File): Option[String] = {
+    try {
+      Some(file.getCanonicalPath)
+    } catch {
+      case e: Throwable =>
+        log.error(s"Ignoring file ${file.getName}, failed to read its path on the filesystem: ${e.getMessage}")
+        None
+    }
+  }
 
   /**
     * List all files in the given directory and all of its subdirectories.
