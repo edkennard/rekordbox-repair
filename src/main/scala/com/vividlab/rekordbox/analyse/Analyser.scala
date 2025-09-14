@@ -1,13 +1,10 @@
 package com.vividlab.rekordbox.analyse
 
-import java.io.File
-import java.nio.file.{Files, Paths}
-
-import com.vividlab.rekordbox.{Config, FileUtils, OS}
 import com.vividlab.rekordbox.data.{CollectionTrack, CollectionTracks, RootPlaylist}
+import com.vividlab.rekordbox.{Config, FileUtils, OS}
 import org.slf4j.LoggerFactory
 
-import scala.jdk.CollectionConverters._
+import java.io.File
 import scala.xml.XML
 
 object Analyser {

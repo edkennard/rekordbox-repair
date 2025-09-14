@@ -1,10 +1,9 @@
 package com.vividlab.rekordbox.analyse
 
-import java.io.File
-
 import com.vividlab.rekordbox.OS
 import com.vividlab.rekordbox.data.CollectionTrack
 
+import java.io.File
 import scala.reflect.ClassTag
 
 sealed trait LocateFileResult {

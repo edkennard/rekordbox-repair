@@ -82,7 +82,9 @@ class RekordBoxRewriteRule(
   }
 
   // The built-in copy function for attributes isn't sufficient so pimping it was necessary
-  implicit def pimpedAttribute(attr: Attribute) = new {
+  implicit def pimpedAttribute(attr: Attribute): Object {
+    def pimpedCopy(key: String, value: Any): Attribute
+  } = new {
     def pimpedCopy(key: String = attr.key, value: Any = attr.value): Attribute =
       Attribute(attr.pre, key, Text(value.toString), attr.next)
   }
@@ -100,7 +102,7 @@ class RekordBoxRewriteRule(
   private def rewriteAttribute(e: Elem, attributeName: String, newValue: String): Elem = {
     e.copy(attributes = e.attributes.map {
       case attr@Attribute(attrName, _, _) if attrName == attributeName =>
-        attr.pimpedCopy(value = newValue)
+        attr.pimpedCopy(key = attr.key, value = newValue)
       case other =>
         other
     })

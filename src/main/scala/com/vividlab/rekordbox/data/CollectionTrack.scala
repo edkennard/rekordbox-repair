@@ -1,9 +1,8 @@
 package com.vividlab.rekordbox.data
 
-import java.io.File
-
 import com.vividlab.rekordbox.FileUtils
 
+import java.io.File
 import scala.xml.{Elem, Node}
 
 case class CollectionTrack(

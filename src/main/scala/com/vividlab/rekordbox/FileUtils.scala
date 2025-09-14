@@ -10,7 +10,7 @@ import java.nio.file.AccessDeniedException
 object FileUtils {
   private val log = LoggerFactory.getLogger(getClass)
 
-  val supportedTypes = Seq("mp3", "m4a", "aac", "aif", "aiff", "fla", "flac", "wav", "avi", "mpg", "mp4", "m4v", "mov", "qtz")
+  val supportedTypes: Seq[String] = Seq("mp3", "m4a", "aac", "aif", "aiff", "fla", "flac", "wav", "avi", "mpg", "mp4", "m4v", "mov", "qtz")
 
   /**
     * A location in rekordbox format ready to write out to XML with any special characters such as spaces encoded

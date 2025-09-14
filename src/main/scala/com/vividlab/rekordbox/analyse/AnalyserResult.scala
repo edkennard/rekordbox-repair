@@ -1,9 +1,8 @@
 package com.vividlab.rekordbox.analyse
 
-import java.io.File
-
 import com.vividlab.rekordbox.OS
 
+import java.io.File
 import scala.io.Source
 
 case class AnalyserResult(
@@ -11,9 +10,9 @@ case class AnalyserResult(
   filesNotInRekordBox: Seq[File],
   filesWithPathTooLong: Seq[File]
 ) {
-  val total: Int = locateFileResults.results.size
+  private val total: Int = locateFileResults.results.size
 
-  val summary: String = s"""
+  private val summary: String = s"""
     |Total tracks in collection: $total
     |Tracks OK: ${locateFileResults.ok.size}
     |Tracks repaired: ${locateFileResults.relocated.size}
